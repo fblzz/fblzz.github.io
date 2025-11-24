@@ -1,8 +1,11 @@
 let
 	jost_italic,
-	size = 10,
+	x = 0,
+	y = 0,
+	size = 20,
 	gap = 20,
 	angle = 0,
+	offset = 0,
 	increment;
 
 function preload() {
@@ -13,24 +16,27 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	textFont(jost_italic);
-	increment = TWO_PI / 180;
 }
 
 function draw() {
-	background(255, 255, 100);
+	background(0);
 	fill(0);
+
 	push();
-	translate(0,0,0);
-	//size = map(sin(frameCount * 0.02), -1, 1, 10, 12);
+	translate(-width / 2, -height / 2 + size);
 	textSize(size);
-	for (let i = 0; i <= 5; i++) {
-		for (let j = 0; j <= 5; j++) {
-			text("studio pèz", i * 100, j * gap);
-		}
+	noStroke();
+	fill(255, 255, 255, 15);
+	for (let y = 0; y < height / size - 1; y++) {
+		text(
+			"     studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz   studio pèz ",
+			x,
+			y * size
+		);
 	}
 	pop();
-
-	/*
+	
+	
 	//Line wave pattern
 	for (let i = 0; i < width; i += 10) {
 		let offset = i / 20;
@@ -38,12 +44,12 @@ function draw() {
 		circle(i, y, 5);
 	}
 	// increment angle
-	angle += increment; */
+	angle += increment; 
 }
-/*
+
 function sinMovment(angle, offset, minVal, maxVal) {
   let factor = sin(angle + offset);
   // Change the sinus output range (-1, 1) to another range (minVal, maxVal)
   let sinMovementVal = map(factor, -1, 1, minVal, maxVal);
   return sinMovementVal;
-}*/
+}
