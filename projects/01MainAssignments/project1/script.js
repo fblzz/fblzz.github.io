@@ -19,6 +19,8 @@ function setup() {
 function draw() {
 	background(255, 255, 100);
 	fill(0);
+	push();
+	translate(0,0,0);
 	//size = map(sin(frameCount * 0.02), -1, 1, 10, 12);
 	textSize(size);
 	for (let i = 0; i <= 5; i++) {
@@ -26,6 +28,7 @@ function draw() {
 			text("studio pèz", i * 100, j * gap);
 		}
 	}
+	pop();
 
 	/*
 	//Line wave pattern
