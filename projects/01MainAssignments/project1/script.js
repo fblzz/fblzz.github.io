@@ -1,5 +1,6 @@
 let
 	jost_italic,
+	montserrat,
 	prism, txt,
 	x = 0,
 	y = 0,
@@ -12,6 +13,7 @@ let
 function preload() {
 	// load the font
 	jost_italic = loadFont('jost-italic.otf');
+	montserrat = loadFont('Montserrat-Black.ttf');
 	prism = loadModel('prism.obj', true);
 	txt = loadImage("https://media.istockphoto.com/id/1427442928/photo/blue-glass-texture.jpg?s=612x612&w=0&k=20&c=59naaey41ZhS-FDFj5f8Fdvw6hES6D820rfjykQwsas=")
 }
@@ -20,6 +22,13 @@ function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	textFont(jost_italic);
 	orbitControl();
+
+
+	textTexture = createGraphics(500, 500);
+	textTexture.fill(255);
+	textTexture.textFont(montserrat);
+	textTexture.textSize(25);
+	textTexture.text("Fabio", 100, 100);
 }
 
 function draw() {
@@ -55,7 +64,7 @@ function draw() {
 		const waveAmp = 4; // vertical amplitude in pixels
 		const waveSpeed = 0.04; // how fast the wave moves
 		const wavePhaseRow = row * 0.35; // phase offset per row
-		
+
 		for (let i = 0; i < lineWords.length; i++) {
 			const token = lineWords[i];
 			const w = textWidth(token);
@@ -102,8 +111,8 @@ function draw() {
 	rotateZ(frameCount * 0.01);
 	scale(1.2);
 	shininess(200);
-	//texture(txt);
+	//texture(textTexture);
 	model(prism);
 	pop();
 
-	}
+}
