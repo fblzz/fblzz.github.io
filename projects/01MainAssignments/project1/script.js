@@ -1,13 +1,16 @@
 let
 	jost_italic,
 	montserrat,
-	prism, txt,
+	prism,
+	txt,
 	x = 0,
 	y = 0,
 	size = 20,
 	gap = 20,
 	angle = 0,
 	offset = 0,
+	hov_col,
+	waveSpeed = 0.04,
 	increment;
 
 function preload() {
@@ -23,17 +26,22 @@ function setup() {
 	textFont(jost_italic);
 	orbitControl();
 
-
+	/*
 	textTexture = createGraphics(500, 500);
-	textTexture.fill(255);
 	textTexture.textFont(montserrat);
+	textTexture.background(255, 255, 255, 200);
+	textTexture.fill(120, 197, 239, 255);
 	textTexture.textSize(25);
-	textTexture.text("Fabio", 100, 100);
+	for(let i = 0; i <=4; i++){
+		textTexture.text("Lorem Ipsum", 0, i*90);
+	}
+	*/
 }
 
 function draw() {
 	background(0);
 
+	hov_col = color(120, 197, 239, 255);
 
 
 	push();
@@ -62,7 +70,7 @@ function draw() {
 
 		// wave parameters (y-axis)
 		const waveAmp = 4; // vertical amplitude in pixels
-		const waveSpeed = 0.04; // how fast the wave moves
+		//let waveSpeed = 0.04; // how fast the wave moves
 		const wavePhaseRow = row * 0.35; // phase offset per row
 
 		for (let i = 0; i < lineWords.length; i++) {
@@ -86,10 +94,10 @@ function draw() {
 				mouseY <= bottom;
 
 			if (hovered) {
-				fill(120, 197, 239, 255); // bright color when hovered
+				fill(hov_col);
 				anyHover = true;
 			} else {
-				fill(255, 255, 255, 15); // default faint text
+				fill(255, 255, 255, 15);
 			}
 
 			text(token, xPos, drawY);
@@ -100,6 +108,25 @@ function draw() {
 
 
 
+	// CONE
+	/*
+	push();
+	translate(0, 0, 300);
+	//noStroke();
+	stroke(255); strokeWeight(0.1);
+	pointLight(255, 255, 255, width, - windowHeight, 0);
+	pointLight(120, 197, 239, mouseX, mouseY, 2000);
+	rotateY(frameCount * 0.01);
+	scale(6);
+	shininess(200);
+	texture(textTexture);
+	sphere(24, 24, 2);
+	pop();
+	*/
+
+
+	// PRISM
+	/*
 	push();
 	translate(0, 0, 300);
 	fill(255, 255, 255, 200);
@@ -114,5 +141,15 @@ function draw() {
 	//texture(textTexture);
 	model(prism);
 	pop();
+	*/
 
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
+
+function mousePressed() {
+	waveSpeed += 0.02;
+	
 }
