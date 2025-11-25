@@ -12,10 +12,12 @@ let
 	offset,
 	hov_col,
 	waveSpeed = 0.04,
-	increment;
-	nth = 10;
-i_minVal = -50;
-i_maxVal = 50;
+	increment,
+	nth = 10,
+	i_minVal = -50,
+	i_maxVal = 50,
+	text_col,
+	text_col_t = 255;
 
 function preload() {
 	// load the font
@@ -29,8 +31,9 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	textFont(jost_italic);
-	orbitControl();
+	//orbitControl();
 	increment = TWO_PI / 180;
+	textAlign(CENTER, CENTER);
 
 	/*
 	textTexture = createGraphics(500, 500);
@@ -54,6 +57,7 @@ function draw() {
 	// send the text behind the scene (negative Z) so 3D models can appear in front
 	translate(-width / 2, -height / 2 + size, -1);
 	textSize(size);
+	textFont(jost_italic);
 	noStroke();
 
 	// Prepare the repeated word and how many times to draw it per row.
@@ -156,7 +160,7 @@ function draw() {
 		fill(255, 255, 255, 100);
 		if (i % nth == 0) {
 			fill(120, 197, 239, 255);
-		}else {
+		} else {
 			fill(255, 255, 255, 100);
 		}
 		circle(i, y + (height / 2) - 150, 10);
@@ -166,12 +170,20 @@ function draw() {
 	for (let i = 0 - width; i < width; i += 110) {
 		let offset = i / 200;
 		let y = sinMovment(angle, offset, i_minVal, i_maxVal);
+		noStroke();
 		texture(graphic);
 		circle(-i, y, 100);
 	}
 
 	// increment angle
 	angle += increment;
+
+	
+	text_col = color(255, 255, 255, text_col_t);
+	fill(text_col);
+	textSize(50);
+	textFont(montserrat);
+	text('Press mouse & see what happens!', 0, -200);
 
 }
 
@@ -210,8 +222,12 @@ function mousePressed() {
 		nth = 10;
 	}
 
+	text_col_t -= 255;
+
 	console.log(waveSpeed);
 	console.log(i_minVal, i_maxVal);
-	console.log(nth);
+	console.log(nth);	
+	console.log(text_col_t);
+	
 
 }
